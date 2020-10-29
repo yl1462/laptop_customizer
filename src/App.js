@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import slugify from 'slugify';
 
 import './App.css';
+import Header from './Header/Header'
+import Cart from './Cart.js';
+import Summary from './Summary.js'
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -75,37 +78,35 @@ class App extends Component {
       );
     });
 
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const selectedOption = this.state.selected[feature];
+    // const summary = Object.keys(this.state.selected).map((feature, idx) => {
+    //   const featureHash = feature + '-' + idx;
+    //   const selectedOption = this.state.selected[feature];
 
-      return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
-      );
-    });
+    //   return (
+    //     <div className="summary__option" key={featureHash}>
+    //       <div className="summary__option__label">{feature} </div>
+    //       <div className="summary__option__value">{selectedOption.name}</div>
+    //       <div className="summary__option__cost">
+    //         {USCurrencyFormat.format(selectedOption.cost)}
+    //       </div>
+    //     </div>
+    //   );
+    // });
 
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
+    // const total = Object.keys(this.state.selected).reduce(
+    //   (acc, curr) => acc + this.state.selected[curr].cost,
+    //   0
+    // );
 
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
+        <Header />
         <main>
           <form className="main__form">
             <h2>Customize your laptop</h2>
             {features}
           </form>
-          <section className="main__summary">
+          {/* <section className="main__summary">
             <h2>Your cart</h2>
             {summary}
             <div className="summary__total">
@@ -114,7 +115,13 @@ class App extends Component {
                 {USCurrencyFormat.format(total)}
               </div>
             </div>
-          </section>
+          </section> */}
+
+          
+          <Summary
+            selected={this.state.selected}
+          />
+
         </main>
       </div>
     );
